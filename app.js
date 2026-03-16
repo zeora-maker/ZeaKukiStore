@@ -5,8 +5,7 @@
 
 // ===== CONFIG (sesuaikan jika perlu) =====
 const CONFIG = {
-  // Pakai 127.0.0.1 agar cocok dengan Live Server VS Code
-  backendUrl: 'http://127.0.0.1:3000',
+  backendUrl: 'https://sewa-bot-production.up.railway.app',
 };
 
 // ===== STATE =====
