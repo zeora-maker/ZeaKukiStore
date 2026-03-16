@@ -780,3 +780,311 @@ body {
   .hero-features { gap: 0.4rem; }
   .feat-chip { font-size: 0.75rem; }
 }
+
+/* ============================================================
+   ANIMASI KEREN — SewaBot
+   ============================================================ */
+
+/* ===== FLOATING PARTICLES DI HERO ===== */
+.hero::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image:
+    radial-gradient(circle, var(--mint) 1.5px, transparent 1.5px),
+    radial-gradient(circle, var(--pink) 1px, transparent 1px);
+  background-size: 60px 60px, 40px 40px;
+  background-position: 0 0, 20px 20px;
+  opacity: 0.08;
+  pointer-events: none;
+  animation: particleDrift 20s linear infinite;
+}
+@keyframes particleDrift {
+  0%   { background-position: 0 0, 20px 20px; }
+  100% { background-position: 60px 60px, 80px 80px; }
+}
+
+/* ===== HERO TITLE TYPEWRITER SHIMMER ===== */
+.gradient-text {
+  animation: shimmer 3s ease-in-out infinite;
+  background-size: 200% auto;
+}
+@keyframes shimmer {
+  0%   { background-position: 0% center; }
+  50%  { background-position: 100% center; }
+  100% { background-position: 0% center; }
+}
+
+/* ===== HERO TAG PULSE ===== */
+.hero-tag {
+  animation: tagPulse 2.5s ease-in-out infinite;
+}
+@keyframes tagPulse {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(62,207,142,0.3); }
+  50%       { box-shadow: 0 0 0 8px rgba(62,207,142,0); }
+}
+
+/* ===== FEAT CHIPS FLOAT IN ===== */
+.feat-chip {
+  animation: chipFloat 0.5s ease both;
+}
+.feat-chip:nth-child(1) { animation-delay: 0.1s; }
+.feat-chip:nth-child(2) { animation-delay: 0.2s; }
+.feat-chip:nth-child(3) { animation-delay: 0.3s; }
+.feat-chip:nth-child(4) { animation-delay: 0.4s; }
+@keyframes chipFloat {
+  from { opacity: 0; transform: translateY(20px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* ===== BUTTON RIPPLE EFFECT ===== */
+.btn-select {
+  position: relative;
+  overflow: hidden;
+}
+.btn-select::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle, rgba(255,255,255,0.4) 0%, transparent 70%);
+  transform: scale(0);
+  opacity: 0;
+  transition: transform 0.5s ease, opacity 0.5s ease;
+}
+.btn-select:active::after {
+  transform: scale(2.5);
+  opacity: 1;
+  transition: 0s;
+}
+
+/* ===== BTN HERO SHIMMER ===== */
+.btn-hero {
+  position: relative;
+  overflow: hidden;
+}
+.btn-hero::before {
+  content: '';
+  position: absolute;
+  top: 0; left: -75%;
+  width: 50%; height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+  transform: skewX(-15deg);
+  animation: btnShimmer 2.5s ease-in-out infinite;
+}
+@keyframes btnShimmer {
+  0%   { left: -75%; }
+  100% { left: 125%; }
+}
+
+/* ===== PACKAGE CARD ENTRANCE ===== */
+.package-card {
+  animation: cardEntrance 0.6s ease both;
+}
+.packages-grid .package-card:nth-child(1) { animation-delay: 0.1s; }
+.packages-grid .package-card:nth-child(2) { animation-delay: 0.2s; }
+.packages-grid .package-card:nth-child(3) { animation-delay: 0.3s; }
+.packages-grid .package-card:nth-child(4) { animation-delay: 0.4s; }
+@keyframes cardEntrance {
+  from { opacity: 0; transform: translateY(40px) scale(0.96); }
+  to   { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+/* ===== PACKAGE ICON BOUNCE ===== */
+.package-icon {
+  display: inline-block;
+  animation: iconBounce 2s ease-in-out infinite;
+}
+.package-card:nth-child(2) .package-icon { animation-delay: 0.3s; }
+.package-card:nth-child(3) .package-icon { animation-delay: 0.6s; }
+.package-card:nth-child(4) .package-icon { animation-delay: 0.9s; }
+@keyframes iconBounce {
+  0%, 100% { transform: translateY(0); }
+  50%       { transform: translateY(-6px); }
+}
+
+/* ===== MODAL ENTRANCE ANIMASI ===== */
+.modal-overlay.active .modal-box {
+  animation: modalPop 0.4s cubic-bezier(0.34, 1.56, 0.64, 1) both;
+}
+@keyframes modalPop {
+  0%   { opacity: 0; transform: scale(0.85) translateY(30px); }
+  100% { opacity: 1; transform: scale(1) translateY(0); }
+}
+
+/* ===== PAY BUTTON PULSE ===== */
+.btn-pay {
+  position: relative;
+  overflow: hidden;
+}
+.btn-pay::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at center, rgba(255,255,255,0.25), transparent 70%);
+  transform: scale(0);
+  opacity: 0;
+  border-radius: 999px;
+  transition: transform 0.6s ease, opacity 0.6s ease;
+}
+.btn-pay:hover::before {
+  transform: scale(2);
+  opacity: 1;
+}
+.btn-pay::after {
+  content: '';
+  position: absolute;
+  inset: -3px;
+  border-radius: 999px;
+  background: linear-gradient(135deg, var(--pink), var(--mint), var(--pink));
+  background-size: 300% 300%;
+  opacity: 0;
+  z-index: -1;
+  animation: payGlow 2s ease infinite;
+  transition: opacity 0.3s;
+}
+.btn-pay:hover::after { opacity: 1; }
+@keyframes payGlow {
+  0%   { background-position: 0% 50%; }
+  50%  { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+/* ===== SUCCESS CIRCLE ANIMASI ===== */
+.success-circle {
+  animation: successPop 0.6s cubic-bezier(0.34, 1.56, 0.64, 1) both;
+}
+.success-circle::after {
+  content: '';
+  position: absolute;
+  inset: -8px;
+  border-radius: 50%;
+  border: 3px solid var(--mint);
+  animation: successRing 1s ease-out 0.4s both;
+}
+@keyframes successRing {
+  from { transform: scale(0.8); opacity: 1; }
+  to   { transform: scale(1.4); opacity: 0; }
+}
+.success-animation { position: relative; display: flex; justify-content: center; }
+
+/* ===== SUCCESS TITLE BOUNCE ===== */
+.success-title {
+  animation: titleBounce 0.5s cubic-bezier(0.34, 1.56, 0.64, 1) 0.3s both;
+}
+@keyframes titleBounce {
+  from { opacity: 0; transform: scale(0.8); }
+  to   { opacity: 1; transform: scale(1); }
+}
+
+/* ===== CONFETTI POP DI SUCCESS MODAL ===== */
+.success-box::before {
+  content: '🎉';
+  position: absolute;
+  top: 20px; left: 20px;
+  font-size: 1.5rem;
+  animation: confettiLeft 0.8s cubic-bezier(0.34, 1.56, 0.64, 1) 0.2s both;
+}
+.success-box::after {
+  content: '✨';
+  position: absolute;
+  top: 20px; right: 20px;
+  font-size: 1.5rem;
+  animation: confettiRight 0.8s cubic-bezier(0.34, 1.56, 0.64, 1) 0.4s both;
+}
+.success-box { position: relative; overflow: visible; }
+@keyframes confettiLeft {
+  from { opacity: 0; transform: translate(-20px, 20px) rotate(-30deg) scale(0); }
+  to   { opacity: 1; transform: translate(0, 0) rotate(0deg) scale(1); }
+}
+@keyframes confettiRight {
+  from { opacity: 0; transform: translate(20px, 20px) rotate(30deg) scale(0); }
+  to   { opacity: 1; transform: translate(0, 0) rotate(0deg) scale(1); }
+}
+
+/* ===== STEP CARD ENTRANCE ===== */
+.step-card {
+  animation: stepEntrance 0.5s ease both;
+}
+.steps-grid .step-card:nth-child(1) { animation-delay: 0.1s; }
+.steps-grid .step-card:nth-child(2) { animation-delay: 0.2s; }
+.steps-grid .step-card:nth-child(3) { animation-delay: 0.3s; }
+.steps-grid .step-card:nth-child(4) { animation-delay: 0.4s; }
+@keyframes stepEntrance {
+  from { opacity: 0; transform: translateY(30px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* ===== STEP ICON SPIN ON HOVER ===== */
+.step-card:hover .step-icon {
+  display: inline-block;
+  animation: iconSpin 0.5s ease;
+}
+@keyframes iconSpin {
+  0%   { transform: rotate(0deg) scale(1); }
+  50%  { transform: rotate(20deg) scale(1.2); }
+  100% { transform: rotate(0deg) scale(1); }
+}
+
+/* ===== FORM INPUT FOCUS ANIMATION ===== */
+.form-input {
+  transition: border-color 0.3s ease, box-shadow 0.3s ease, transform 0.2s ease;
+}
+.form-input:focus {
+  transform: scale(1.01);
+}
+
+/* ===== RADIO OPTION SLIDE ANIMASI ===== */
+.radio-option {
+  transition: all 0.25s cubic-bezier(0.34, 1.2, 0.64, 1);
+}
+.radio-option:has(input:checked) {
+  transform: scale(1.02);
+}
+
+/* ===== TOAST SLIDE UP ===== */
+.toast {
+  animation: none;
+}
+.toast.show {
+  animation: toastSlide 0.4s cubic-bezier(0.34, 1.56, 0.64, 1) both;
+}
+@keyframes toastSlide {
+  from { opacity: 0; transform: translateX(-50%) translateY(30px) scale(0.9); }
+  to   { opacity: 1; transform: translateX(-50%) translateY(0) scale(1); }
+}
+
+/* ===== FOOTER WA BUTTON PULSE ===== */
+.footer-wa {
+  position: relative;
+}
+.footer-wa::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: 999px;
+  border: 2px solid var(--mint);
+  animation: waPulse 2s ease-in-out infinite;
+}
+@keyframes waPulse {
+  0%   { transform: scale(1); opacity: 0.7; }
+  100% { transform: scale(1.3); opacity: 0; }
+}
+
+/* ===== PRICE AMOUNT HIGHLIGHT ===== */
+.package-card:hover .price-amount {
+  animation: priceHighlight 0.3s ease both;
+}
+@keyframes priceHighlight {
+  0%   { transform: scale(1); }
+  50%  { transform: scale(1.1); }
+  100% { transform: scale(1); }
+}
+
+/* ===== NAV BADGE FLOAT ===== */
+.nav-badge {
+  animation: navFloat 3s ease-in-out infinite;
+}
+@keyframes navFloat {
+  0%, 100% { transform: translateY(0); }
+  50%       { transform: translateY(-3px); }
+}
