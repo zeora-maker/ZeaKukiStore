@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>SewaBot — Rental Bot WhatsApp</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;500;600;700&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+  <!-- Midtrans Snap.js -->
+  <script src="https://app.midtrans.com/snap/snap.js"
+          data-client-key="Mid-client-ViEFiK8-otK5Dkhm"></script>
+</head>
+<body>
+
+  <!-- ===== HERO SECTION ===== -->
+  <header class="hero">
+    <div class="hero-blob blob-1"></div>
+    <div class="hero-blob blob-2"></div>
+    <nav class="navbar">
+      <div class="logo">
+        <span class="logo-icon">🤖</span>
+        <span class="logo-text">SewaBot</span>
+      </div>
+      <div class="nav-badge">✨ Trusted by 500+ Groups</div>
+    </nav>
+    <div class="hero-content">
+      <div class="hero-tag">🚀 Bot WhatsApp Otomatis</div>
+      <h1 class="hero-title">Kelola Grup WA-mu<br /><span class="gradient-text">Lebih Mudah & Cerdas</span></h1>
+      <p class="hero-subtitle">Sewa bot WhatsApp kami dan nikmati fitur auto-reply, anti-spam, games, dan banyak lagi — langsung aktif dalam hitungan menit!</p>
+      <a href="#packages" class="btn-hero">
+        <span>Lihat Paket Sekarang</span>
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+      </a>
+    </div>
+    <div class="hero-features">
+      <div class="feat-chip">⚡ Aktivasi Instan</div>
+      <div class="feat-chip">🛡️ Anti-Spam</div>
+      <div class="feat-chip">🎮 Mini Games</div>
+      <div class="feat-chip">🤝 Support 24/7</div>
+    </div>
+  </header>
+
+  <!-- ===== PACKAGES SECTION ===== -->
+  <section class="packages" id="packages">
+    <div class="section-header">
+      <span class="section-tag">Pilih Durasi</span>
+      <h2 class="section-title">Paket Sewa Bot</h2>
+      <p class="section-desc">Harga terjangkau, fitur lengkap. Pilih paket yang sesuai kebutuhan grupmu.</p>
+    </div>
+    <div class="packages-grid">
+
+      <!-- Package Card 1 -->
+      <div class="package-card" data-package="30" data-price="15000" data-label="Starter — 30 Hari">
+        <div class="package-badge">Populer</div>
+        <div class="package-icon">🌱</div>
+        <h3 class="package-name">Starter</h3>
+        <div class="package-duration">30 Hari</div>
+        <div class="package-price">
+          <span class="price-currency">Rp</span>
+          <span class="price-amount">15.000</span>
+        </div>
+        <ul class="package-features">
+          <li><span class="feat-check">✓</span> Auto Reply Perintah</li>
+          <li><span class="feat-check">✓</span> Anti-Spam & Toxic Filter</li>
+          <li><span class="feat-check">✓</span> Welcome & Goodbye Member</li>
+          <li><span class="feat-check">✓</span> 5 Mini Games</li>
+          <li><span class="feat-check">✓</span> Support via WA</li>
+        </ul>
+        <button class="btn-select" onclick="selectPackage(this)">Pilih Paket Ini</button>
+      </div>
+
+      <!-- Package Card 2 -->
+      <div class="package-card featured" data-package="60" data-price="25000" data-label="Pro — 60 Hari">
+        <div class="package-badge best">Best Value</div>
+        <div class="package-icon">🚀</div>
+        <h3 class="package-name">Pro</h3>
+        <div class="package-duration">60 Hari</div>
+        <div class="package-price">
+          <span class="price-currency">Rp</span>
+          <span class="price-amount">25.000</span>
+        </div>
+        <ul class="package-features">
+          <li><span class="feat-check">✓</span> Semua Fitur Starter</li>
+          <li><span class="feat-check">✓</span> Sticker Generator</li>
+          <li><span class="feat-check">✓</span> Downloader (IG, TikTok, YT)</li>
+          <li><span class="feat-check">✓</span> Leveling & XP System</li>
+          <li><span class="feat-check">✓</span> 15+ Mini Games</li>
+          <li><span class="feat-check">✓</span> Priority Support</li>
+        </ul>
+        <button class="btn-select" onclick="selectPackage(this)">Pilih Paket Ini</button>
+      </div>
+
+      <!-- Package Card 3 -->
+      <div class="package-card" data-package="90" data-price="40000" data-label="Ultimate — 90 Hari">
+        <div class="package-badge">Hemat Lebih</div>
+        <div class="package-icon">👑</div>
+        <h3 class="package-name">Ultimate</h3>
+        <div class="package-duration">90 Hari</div>
+        <div class="package-price">
+          <span class="price-currency">Rp</span>
+          <span class="price-amount">40.000</span>
+        </div>
+        <ul class="package-features">
+          <li><span class="feat-check">✓</span> Semua Fitur Pro</li>
+          <li><span class="feat-check">✓</span> Custom Prefix Bot</li>
+          <li><span class="feat-check">✓</span> AI ChatBot (GPT-powered)</li>
+          <li><span class="feat-check">✓</span> Jadwal Kirim Pesan</li>
+          <li><span class="feat-check">✓</span> Analytics Grup</li>
+          <li><span class="feat-check">✓</span> Dedicated Support</li>
+        </ul>
+        <button class="btn-select" onclick="selectPackage(this)">Pilih Paket Ini</button>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ===== ORDER MODAL ===== -->
+  <div class="modal-overlay" id="orderModal">
+    <div class="modal-box">
+      <button class="modal-close" onclick="closeModal()">✕</button>
+      <div class="modal-header">
+        <div class="modal-icon">📝</div>
+        <h3 class="modal-title">Form Order Bot</h3>
+        <p class="modal-subtitle">Isi data dengan benar untuk proses aktivasi yang cepat</p>
+      </div>
+
+      <div class="selected-package-info" id="selectedPackageInfo">
+        <span class="sp-label">Paket dipilih:</span>
+        <span class="sp-value" id="spValue">—</span>
+      </div>
+
+      <form id="orderForm" class="order-form">
+        <div class="form-group">
+          <label class="form-label" for="nama">
+            <span class="label-icon">👤</span> Nama Lengkap
+          </label>
+          <input type="text" id="nama" name="nama" class="form-input"
+                 placeholder="Contoh: Budi Santoso" required />
+        </div>
+
+        <div class="form-group">
+          <label class="form-label" for="whatsapp">
+            <span class="label-icon">📱</span> Nomor WhatsApp
+          </label>
+          <input type="tel" id="whatsapp" name="whatsapp" class="form-input"
+                 placeholder="Contoh: 08123456789" required />
+          <span class="form-hint">Nomor aktif untuk notifikasi aktivasi</span>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label" for="linkGroup">
+            <span class="label-icon">🔗</span> Link Invite Group WA
+          </label>
+          <input type="url" id="linkGroup" name="linkGroup" class="form-input"
+                 placeholder="https://chat.whatsapp.com/xxxxx" required />
+          <span class="form-hint">Link undangan grup yang ingin dipasang bot</span>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label">
+            <span class="label-icon">📦</span> Pilihan Paket
+          </label>
+          <div class="radio-group">
+            <label class="radio-option">
+              <input type="radio" name="paket" value="30" data-price="15000" data-label="Starter — 30 Hari" />
+              <span class="radio-content">
+                <span class="radio-name">🌱 Starter</span>
+                <span class="radio-detail">30 Hari — Rp 15.000</span>
+              </span>
+            </label>
+            <label class="radio-option">
+              <input type="radio" name="paket" value="60" data-price="25000" data-label="Pro — 60 Hari" />
+              <span class="radio-content">
+                <span class="radio-name">🚀 Pro</span>
+                <span class="radio-detail">60 Hari — Rp 25.000</span>
+              </span>
+            </label>
+            <label class="radio-option">
+              <input type="radio" name="paket" value="90" data-price="40000" data-label="Ultimate — 90 Hari" />
+              <span class="radio-content">
+                <span class="radio-name">👑 Ultimate</span>
+                <span class="radio-detail">90 Hari — Rp 40.000</span>
+              </span>
+            </label>
+          </div>
+        </div>
+
+        <button type="submit" class="btn-pay" id="btnPay">
+          <span id="btnPayText">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="1" y="4" width="22" height="16" rx="2" ry="2"/><line x1="1" y1="10" x2="23" y2="10"/></svg>
+            Lanjut Pembayaran
+          </span>
+          <span id="btnPayLoading" class="btn-loading" style="display:none;">
+            <span class="spinner"></span> Memproses...
+          </span>
+        </button>
+      </form>
+    </div>
+  </div>
+
+  <!-- ===== SUCCESS MODAL ===== -->
+  <div class="modal-overlay" id="successModal">
+    <div class="modal-box success-box">
+      <div class="success-animation">
+        <div class="success-circle">
+          <svg width="60" height="60" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5"><path d="M20 6L9 17l-5-5"/></svg>
+        </div>
+      </div>
+      <h3 class="success-title">Pembayaran Berhasil! 🎉</h3>
+      <p class="success-desc">Terima kasih! Pesananmu sudah diterima dan sedang diproses oleh tim kami.</p>
+      <div class="success-details" id="successDetails"></div>
+      <p class="success-note">📱 Notifikasi sudah dikirim ke Owner. Bot akan segera diaktifkan di grupmu!</p>
+      <button class="btn-close-success" onclick="closeSuccessModal()">Kembali ke Beranda</button>
+    </div>
+  </div>
+
+  <!-- ===== HOW IT WORKS ===== -->
+  <section class="how-it-works">
+    <div class="section-header">
+      <span class="section-tag">Cara Kerja</span>
+      <h2 class="section-title">Mudah dalam 4 Langkah</h2>
+    </div>
+    <div class="steps-grid">
+      <div class="step-card">
+        <div class="step-number">01</div>
+        <div class="step-icon">📦</div>
+        <h4>Pilih Paket</h4>
+        <p>Pilih durasi sewa yang sesuai budget dan kebutuhanmu</p>
+      </div>
+      <div class="step-card">
+        <div class="step-number">02</div>
+        <div class="step-icon">📝</div>
+        <h4>Isi Form</h4>
+        <p>Masukkan nama, nomor WA, dan link invite grup kamu</p>
+      </div>
+      <div class="step-card">
+        <div class="step-number">03</div>
+        <div class="step-icon">💳</div>
+        <h4>Bayar</h4>
+        <p>Bayar via QRIS, transfer bank, atau dompet digital</p>
+      </div>
+      <div class="step-card">
+        <div class="step-number">04</div>
+        <div class="step-icon">🤖</div>
+        <h4>Bot Aktif!</h4>
+        <p>Owner akan mengaktifkan bot di grupmu dalam 5 menit</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== FOOTER ===== -->
+  <footer class="footer">
+    <div class="footer-logo">🤖 SewaBot</div>
+    <p class="footer-text">Bot WhatsApp terpercaya untuk komunitas Indonesia 🇮🇩</p>
+    <div class="footer-contact">
+      <a href="https://wa.me/628XXXXXXXX" target="_blank" class="footer-wa">
+        💬 Hubungi Owner
+      </a>
+    </div>
+    <p class="footer-copy">© 2025 SewaBot. Made with 💚 & 🩷</p>
+  </footer>
+
+  <script src="app.js"></script>
+</body>
+</html>
