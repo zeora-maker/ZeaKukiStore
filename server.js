@@ -56,7 +56,7 @@ app.use(cors({
   credentials: true,
 }));
 app.use(bodyParser.json());
-app.use(express.static('.')); // sajikan file frontend
+
 
 // ===== MIDTRANS SNAP CLIENT =====
 const snap = new midtrans.Snap({
