@@ -246,4 +246,4 @@ app.listen(CONFIG.port, () => {
   console.log(`📦 Mode Midtrans: ${CONFIG.midtrans.isProduction ? '🔴 PRODUCTION' : '🟡 SANDBOX'}`);
   console.log(`📱 Owner WA    : ${CONFIG.fonnte.ownerNumber}`);
   console.log(`━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n`);
-});
+}); 
