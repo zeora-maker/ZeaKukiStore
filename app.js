@@ -1,10 +1,12 @@
 /* ============================================================
    SEWA BOT — Frontend JavaScript (app.js)
-   Mode: Langsung kirim order ke WhatsApp Owner (tanpa Midtrans)
+   Mode: Midtrans Payment Gateway
    ============================================================ */
 
-// ===== NOMOR WA OWNER =====
-const OWNER_WA = '62895411165811'; // Nomor WA Zea
+// ===== CONFIG =====
+const CONFIG = {
+  backendUrl: 'https://web-production-9cea7.up.railway.app',
+};
 
 // ===== STATE =====
 let selectedPackage = { id: null, price: null, label: null, display: null };
@@ -64,8 +66,8 @@ document.querySelectorAll('input[name="paket"]').forEach((radio) => {
   });
 });
 
-// ===== FORM SUBMIT → KIRIM KE WA =====
-document.getElementById('orderForm').addEventListener('submit', function (e) {
+// ===== FORM SUBMIT → MIDTRANS =====
+document.getElementById('orderForm').addEventListener('submit', async function (e) {
   e.preventDefault();
 
   const nama       = document.getElementById('nama').value.trim();
@@ -83,27 +85,87 @@ document.getElementById('orderForm').addEventListener('submit', function (e) {
     showToast('⚠️ Format nomor WA tidak valid!', 'error'); return;
   }
 
-  const card        = document.querySelector(`.package-card[data-package="${paketRadio.value}"]`);
-  const paketLabel  = card ? card.dataset.label   : paketRadio.dataset.label;
-  const paketHarga  = card ? card.dataset.display  : '';
+  setPayButtonLoading(true);
 
-  const pesan =
-    `🤖 *ORDER SEWA BOT — ZeaStore*\n` +
-    `━━━━━━━━━━━━━━━━━━━━\n` +
-    `👤 *Nama Penyewa :* ${nama}\n` +
-    `📱 *Nomor WA     :* ${whatsapp}\n` +
-    `🔗 *Link GC      :* ${linkGroup}\n` +
-    `📦 *Paket        :* ${paketLabel}\n` +
-    `💰 *Total Bayar  :* ${paketHarga}\n` +
-    `━━━━━━━━━━━━━━━━━━━━\n` +
-    `Mohon segera diproses. Terima kasih! 🙏`;
+  const orderData = {
+    nama,
+    whatsapp,
+    linkGroup,
+    paket: paketRadio.value,
+    price: paketRadio.dataset.price,
+    label: paketRadio.dataset.label,
+  };
 
-  const waUrl = `https://wa.me/${OWNER_WA}?text=${encodeURIComponent(pesan)}`;
+  try {
+    const res = await fetch(`${CONFIG.backendUrl}/api/create-transaction`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(orderData),
+    });
+
+    if (!res.ok) {
+      const err = await res.json();
+      throw new Error(err.message || 'Gagal membuat transaksi');
+    }
+
+    const { snapToken, orderId } = await res.json();
+
+    window.snap.pay(snapToken, {
+      onSuccess: async function (result) {
+        await handlePaymentSuccess({ ...orderData, orderId, result });
+      },
+      onPending: function () {
+        showToast('⏳ Menunggu pembayaran...', 'success');
+        setPayButtonLoading(false);
+      },
+      onError: function () {
+        showToast('❌ Pembayaran gagal, coba lagi!', 'error');
+        setPayButtonLoading(false);
+      },
+      onClose: function () {
+        showToast('ℹ️ Popup ditutup', '');
+        setPayButtonLoading(false);
+      },
+    });
+
+  } catch (error) {
+    showToast(`❌ ${error.message}`, 'error');
+    setPayButtonLoading(false);
+  }
+});
+
+// ===== HANDLE PAYMENT SUCCESS =====
+async function handlePaymentSuccess(orderData) {
+  try {
+    await fetch(`${CONFIG.backendUrl}/api/notify-owner`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        nama:      orderData.nama,
+        whatsapp:  orderData.whatsapp,
+        linkGroup: orderData.linkGroup,
+        paket:     orderData.label,
+        orderId:   orderData.orderId,
+        status:    'LUNAS',
+      }),
+    });
+  } catch (err) {
+    // Fallback WA link
+    const pesan =
+      `🤖 *NOTIFIKASI SEWA BOT — LUNAS*\n\n` +
+      `👤 *Nama     :* ${orderData.nama}\n` +
+      `📱 *WA       :* ${orderData.whatsapp}\n` +
+      `🔗 *Link GC  :* ${orderData.linkGroup}\n` +
+      `📦 *Paket    :* ${orderData.label}\n` +
+      `💰 *Status   :* ✅ LUNAS\n` +
+      `🆔 *Order ID :* ${orderData.orderId}`;
+    window.open(`https://wa.me/62895411165811?text=${encodeURIComponent(pesan)}`, '_blank');
+  }
 
   closeModal();
-  showSuccessModal({ nama, whatsapp, linkGroup, label: paketLabel, display: paketHarga });
-  setTimeout(() => window.open(waUrl, '_blank'), 800);
-});
+  showSuccessModal(orderData);
+  setPayButtonLoading(false);
+}
 
 // ===== SUCCESS MODAL =====
 function showSuccessModal(data) {
@@ -121,15 +183,25 @@ function showSuccessModal(data) {
       <span class="detail-value">${escapeHtml(data.label)}</span>
     </div>
     <div class="detail-row">
-      <span class="detail-label">💰 Total</span>
-      <span class="detail-value lunas">${escapeHtml(data.display)}</span>
+      <span class="detail-label">💰 Status</span>
+      <span class="detail-value lunas">✅ LUNAS</span>
     </div>`;
 
   document.querySelector('.success-note').textContent =
-    '📱 WhatsApp akan terbuka otomatis — kirim pesan ke Owner untuk konfirmasi pembayaran!';
+    '📱 Notifikasi sudah dikirim ke Owner. Bot akan segera diaktifkan di grupmu!';
 
   document.getElementById('successModal').classList.add('active');
   document.body.style.overflow = 'hidden';
+}
+
+// ===== LOADING STATE =====
+function setPayButtonLoading(isLoading) {
+  const btn     = document.getElementById('btnPay');
+  const text    = document.getElementById('btnPayText');
+  const loading = document.getElementById('btnPayLoading');
+  btn.disabled          = isLoading;
+  text.style.display    = isLoading ? 'none' : 'flex';
+  loading.style.display = isLoading ? 'flex' : 'none';
 }
 
 // ===== TOAST =====
